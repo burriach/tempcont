@@ -9,5 +9,6 @@ Description: More about what it does (maybe more than one line)
 License: GPL (>= 2)
 Encoding: UTF-8
 Imports:
-  nlme
+    nlme,
+    MuMIn
 LazyData: true

@@ -16,5 +16,13 @@ Prints 'temp.cont, world!'.
 }
 \value{}
 \examples{
-temp.cont()
+  library (nlme)
+  library (MuMIn)
+  library (tempcont)
+  data(tempcont_data)
+  mod <- lme (trolls ~ bushes + temperature  + rainfall + drought + gremlins + orcs + warlocks, data=tempcont_data, random= ~1|cave, correlation = corCAR1(form=~year|cave), method="ML")
+  summary (mod)
+  r.squaredGLMM(mod)
+  temp.cont(model = mod, resp = "trolls", driver="temperature", random="cave", dataframe = tempcont_data)
+  temp.cont(model = mod, resp = "trolls", driver="orcs", random="cave", dataframe = tempcont_data)
 }
