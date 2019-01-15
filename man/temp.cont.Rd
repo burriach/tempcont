@@ -1,5 +1,4 @@
-\name{Temporal contributions on trends using mixed models}
-\alias{TempCont}
+\name{temp.cont}
 \title{TempCont: Temporal contributions on trends using mixed models}
 \usage{
   temp.cont(model, resp, driver, random, dataframe)
@@ -42,7 +41,6 @@ Fernández-Martínez et al., 2019. "Global trends in carbon sinks and their rela
 \examples{
   library (nlme)
   library (MuMIn)
-  library (tempcont)
   data(tempcont_data)
   mod <- lme (trolls ~ bushes + temperature  + rainfall + drought + gremlins + orcs + warlocks, data=tempcont_data, random= ~1|cave, correlation = corCAR1(form=~year|cave), method="ML")
   summary (mod)

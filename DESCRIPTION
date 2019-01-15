@@ -7,6 +7,7 @@ Maintainer: Marcos Fernández-Martínez <marcos.fernandez-martinez@uantwerpen.be
 Description: This package is aimed at estimating the effect of the trend in predictor variables on the observed trend of the response variable using mixed models with temporal autocorrelation.
 License: GPL (>= 2)
 Encoding: UTF-8
+Depends: R (>= 2.10)
 Imports:
     nlme,
     MuMIn
