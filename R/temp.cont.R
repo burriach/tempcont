@@ -1,5 +1,6 @@
-temp.cont <- function (model, driver, random, plot=TRUE){
+temp.cont <- function (model, driver, random, timevar="year", plot=TRUE){
   dataframe<- model$data
+  dataframe$year <- dataframe[[timevar]]
   resp<- as.character(model$call$fixed[[2]])
 
   ## Use all fixed effects terms if missing

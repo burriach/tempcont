@@ -1,1 +1,4 @@
 exportPattern("^[[:alpha:]]+")
+importFrom("graphics", "lines")
+importFrom("stats", "aggregate", "median", "predict", "pt", "update")
+importFrom("nlme", "gls", "corAR1", "lme")
