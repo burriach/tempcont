@@ -12,8 +12,7 @@ temp.cont <- function (model, driver, random, timevar="year", plot=TRUE){
   }
 
   # random<- as.character(model$call$random[[2]])
-  ## TODO: not exactly the same value as expected by the current input
-  ## use update() instead and forget dataframe, resp and random
+
 
   dataframe$site <- dataframe[[random]]
   dataframe$seeds <- dataframe[[resp]]
@@ -33,7 +32,7 @@ temp.cont <- function (model, driver, random, timevar="year", plot=TRUE){
   # formFix<- formula(paste(resp, "~", "year"))
   # formRand<- formula(paste("year", "~", random))
 
-  tt<- try(mod.real<- update(model, fixed=seeds ~ year, random=~ year | site, control=list(maxIter=10000, niterEM=10000), method="REML"), silent=TRUE)
+  tt<- try(mod.real<- update(model, fixed=seeds ~ year, random=~ year | site), silent=TRUE)
   # tt <- try(mod.real <-lme (seeds ~ year,  random=~ year|site, data=dataframe, correlation = corAR1(form=~year|site), control=list(maxIter=10000, niterEM=10000), method="REML"), silent = T)
   if (class(tt)=="try-error") {mod.real <-lme (seeds ~ year,  random=~ year|site, data=dataframe, correlation = corAR1(form=~year|site), control=list(maxIter=10000, niterEM=10000, opt='optim'), method="REML")}
 
@@ -41,7 +40,7 @@ temp.cont <- function (model, driver, random, timevar="year", plot=TRUE){
   slope.real.se <- summary (mod.real)$tTable[2,2]
   slope.real.p <- summary (mod.real)$tTable[2,5]
 
-  tt <- try(mod.pred.full <- update(model, fixed=pred.nbp ~ year,  random=~ year | site, data=newdat, control=list(maxIter=10000, niterEM=10000), method="REML"), silent=TRUE)
+  tt <- try(mod.pred.full <- update(model, fixed=pred.nbp ~ year,  random=~ year | site, data=newdat), silent=TRUE)
   # tt <- try(mod.pred.full <-lme (pred.nbp ~ year,  random=~ year |site, data=newdat, correlation = corAR1(form=~year|site), control=list(maxIter=10000, niterEM=10000), method="REML"), silent=T)
   if (class(tt)=="try-error") {tt <-try(mod.pred.full <-lme (pred.nbp ~ year,  random=~ year |site, data=newdat, correlation = corAR1(form=~year|site), control=list(maxIter=10000, niterEM=10000, opt='optim'), method="REML"), silent=T)}
   if (class(tt)=="try-error") {tt <-try(mod.pred.full <-lme (pred.nbp ~ year,  random=~ year |site, data=newdat, control=list(maxIter=10000, niterEM=10000), method="ML"), silent=T)}
@@ -68,7 +67,7 @@ temp.cont <- function (model, driver, random, timevar="year", plot=TRUE){
     newdat$pred.nbp <- as.numeric(predict(model, newdata=newdat, type="response"))
     pred.mod.nbp.cdioxide <- aggregate(newdat$pred.nbp, list(year=newdat$year), FUN=mean)
 
-    tt <- try(mod.varx <- update(model, fixed=pred.nbp ~ year,  random=~year|site, data=newdat, control=list(maxIter=10000, niterEM=10000), method="REML"), silent=TRUE)
+    tt <- try(mod.varx <- update(model, fixed=pred.nbp ~ year,  random=~year|site, data=newdat), silent=TRUE)
     # tt <- try(mod.varx <-lme (pred.nbp ~ year,  random=~year|site, data=newdat, correlation = corAR1(form=~year|site), control=list(maxIter=10000, niterEM=10000), method="REML"), silent=T)
     if (class(tt)=="try-error") {tt <- try(mod.varx <-lme (pred.nbp ~ year,  random=~year|site, data=newdat, correlation = corAR1(form=~year|site), control=list(maxIter=10000, niterEM=10000, opt='optim'), method="REML"),silent=T)}
     if (class(tt)=="try-error") {tt <- try(mod.varx <-lme (pred.nbp ~ year,  random=~1|site, data=newdat, correlation = corAR1(form=~year|site), control=list(maxIter=10000, niterEM=10000, opt='optim'), method="ML"),silent=T)}
@@ -86,7 +85,7 @@ temp.cont <- function (model, driver, random, timevar="year", plot=TRUE){
 
     newdat <- dataframe
     newdat$pppp <- dataframe[[dr]]
-    zz <- try(mod.trendx <- update(model, fixed=pppp ~ year,  random=~year|site, data=newdat, control=list(maxIter=10000, niterEM=10000), method="REML"), silent=TRUE)
+    zz <- try(mod.trendx <- update(model, fixed=pppp ~ year,  random=~year|site, data=newdat), silent=TRUE)
     # zz <- try(mod.trendx <-lme (pppp ~ year,  random=~year|site, data=newdat, correlation = corAR1(form=~year|site), control=list(maxIter=10000, niterEM=10000), method="REML"), silent=T)
     if (class(zz)=="try-error") {zz <- try(mod.trendx <-lme (pppp ~ year,  random=~year|site, data=newdat, correlation = corAR1(form=~year|site), control=list(maxIter=10000, niterEM=10000, opt='optim'), method="REML"),silent=T)}
     if (class(zz)=="try-error") {zz <- try(mod.trendx <-lme (pppp ~ year,  random=~year|site, data=newdat, correlation = corAR1(form=~year|site), control=list(maxIter=10000, niterEM=10000, opt='optim'), method="ML"),silent=T)}
@@ -112,4 +111,4 @@ temp.cont <- function (model, driver, random, timevar="year", plot=TRUE){
   res<- do.call(rbind, out)
 
   return(res)
-} # works well
+}
