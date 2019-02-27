@@ -10,4 +10,4 @@ Encoding: UTF-8
 Depends: R (>= 2.10)
 Imports:
     nlme
-LazyData: true
+LazyData: false
