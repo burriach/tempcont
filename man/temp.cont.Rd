@@ -49,5 +49,7 @@ Fernández-Martínez et al., 2019. "Global trends in carbon sinks and their rela
               correlation = corCAR1(form=~year|cave), method="ML")
   summary (mod)
   temp.cont(model = mod, driver="temperature", random="cave")
-  temp.cont(model = mod, random="cave")
+  \dontrun{
+    temp.cont(model = mod, random="cave")
+  }
 }
