@@ -44,12 +44,13 @@ Fernández-Martínez et al., 2019. "Global trends in carbon sinks and their rela
 \examples{
   library (nlme)
   data(tempcont_data)
-  mod <- lme (trolls ~ bushes + temperature  + rainfall + drought + gremlins +
-              orcs + warlocks, data=tempcont_data, random= ~1|cave,
-              correlation = corCAR1(form=~year|cave), method="ML")
-  summary (mod)
+  mod <- lme(trolls ~ bushes + temperature  + rainfall + drought + gremlins +
+              orcs + warlocks, data=tempcont_data, random=~1|cave,
+              correlation=corCAR1(form=~year|cave), method="ML")
+  summary(mod)
 
   temp.cont(model = mod, driver="temperature", random="cave")
-  \donttest{temp.cont(model = mod, random="cave")} % Avoid long runtimes when checking the package
 
+  # Warning: long runtime (> 20 seconds)
+  \donttest{temp.cont(model = mod, random="cave")}
 }
