@@ -1,7 +1,8 @@
 Package: TempCont
 Type: Package
 Title: Temporal Contributions on Trends using Mixed Models
-Version: 0.1.0
+Version: 0.1.0.9000
+Date: 2019-03-19
 Author: Marcos Fernández-Martínez, Joan Maspons
 Maintainer: Marcos Fernández-Martínez <marcos.fernandez-martinez@uantwerpen.be>
 Description: Method to estimate the effect of the trend in predictor variables on the observed trend

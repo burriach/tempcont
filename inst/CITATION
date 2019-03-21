@@ -1,0 +1,8 @@
+bibentry(bibtype = "Article",
+         title = "Atmospheric deposition, and change in the land carbon sink",
+         author = "Fernández-Martínez, M and Vicca, S and Janssens, IA and Ciais, P and Obersteiner, M and Bartrons, M and Sardans, J and Verger, A and Canadell, JG and Chevallier, F and others",
+         year = 2017,
+         journal = "Scientific reports",
+         volume={7},
+         doi = "10.1038/s41598-017-08755-8",
+         url = "https://CRAN.R-project.org/package=TempCont")
